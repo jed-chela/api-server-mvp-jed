@@ -16,9 +16,9 @@ def create_otp(db: Session, email: str):
     expiry = datetime.utcnow() + timedelta(minutes=OTP_EXPIRY_MINUTES)
 
     otp = OTP(
-        email=email,
-        code=code,
-        expires_at=expiry
+        email = email,
+        code = code,
+        expires_at = expiry
     )
 
     db.add(otp)

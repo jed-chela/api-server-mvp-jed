@@ -1,6 +1,6 @@
 $kind: http-request
 name: Docs JSON
-url: "{{base_url}}/docs"
+url: "{{base_url}}/openapi.json"
 method: GET
 order: 3000
 scripts:
