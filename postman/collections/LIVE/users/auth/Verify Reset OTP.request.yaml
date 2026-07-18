@@ -1,0 +1,14 @@
+$kind: http-request
+name: "Verify Reset OTP"
+url: "{{base_url}}/auth/verify-reset-otp"
+method: "POST"
+headers:
+  "Content-Type": "application/json"
+body:
+  type: "json"
+  content: |+
+    {
+      "email": "john.doe@example.com",
+      "otp": "123456"
+    }
+order: 7000

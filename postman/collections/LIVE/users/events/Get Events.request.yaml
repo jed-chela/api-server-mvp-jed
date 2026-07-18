@@ -1,0 +1,7 @@
+$kind: http-request
+name: "Get Events"
+url: "{{base_url}}/events/"
+method: "GET"
+headers:
+  "Authorization": "Bearer {{token}}"
+order: 1000

@@ -1,0 +1,17 @@
+$kind: http-request
+name: "Sign Up Family"
+url: "{{base_url}}/auth/signup/family"
+method: "POST"
+headers:
+  "Content-Type": "application/json"
+body:
+  type: "json"
+  content: |+
+    {
+      "user_id": 1,
+      "family_size": 4,
+      "role_in_family": "parent",
+      "family_space_name": "Doe Family",
+      "priorities": ["Chores", "Budgeting", "Meal Planning"]
+    }
+order: 4000

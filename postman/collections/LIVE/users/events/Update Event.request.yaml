@@ -1,0 +1,18 @@
+$kind: http-request
+name: "Update Event"
+url: "{{base_url}}/events/1"
+method: "PUT"
+headers:
+  "Content-Type": "application/json"
+  "Authorization": "Bearer {{token}}"
+body:
+  type: "json"
+  content: |+
+    {
+      "name": "Updated Family Picnic",
+      "description": "Annual summer picnic in the park (updated time)",
+      "date": "2026-08-15",
+      "time": "13:00",
+      "category": "social"
+    }
+order: 3000

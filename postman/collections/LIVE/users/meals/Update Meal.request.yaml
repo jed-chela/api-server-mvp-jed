@@ -1,0 +1,19 @@
+$kind: http-request
+name: "Update Meal"
+url: "{{base_url}}/meals/1"
+method: "PUT"
+headers:
+  "Content-Type": "application/json"
+  "Authorization": "Bearer {{token}}"
+body:
+  type: "json"
+  content: |+
+    {
+      "title": "Fried Rice and Turkey",
+      "category": "lunch",
+      "day": "Monday",
+      "selected": true,
+      "member_id": 1,
+      "notes": "Mild option"
+    }
+order: 3000

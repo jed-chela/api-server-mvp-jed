@@ -1,0 +1,18 @@
+$kind: http-request
+name: "Paystack Webhook"
+url: "{{base_url}}/subscriptions/webhook"
+method: "POST"
+headers:
+  "Content-Type": "application/json"
+body:
+  type: "json"
+  content: |+
+    {
+      "event": "charge.success",
+      "data": {
+        "reference": "paystack_tx_ref_123456",
+        "amount": 250000,
+        "status": "success"
+      }
+    }
+order: 2000

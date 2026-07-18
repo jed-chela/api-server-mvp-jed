@@ -1,0 +1,7 @@
+$kind: http-request
+name: "Delete Expense"
+url: "{{base_url}}/budgets/1/expenses/1"
+method: "DELETE"
+headers:
+  "Authorization": "Bearer {{token}}"
+order: 7000

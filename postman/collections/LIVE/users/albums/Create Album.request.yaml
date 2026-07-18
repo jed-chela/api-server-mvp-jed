@@ -1,0 +1,15 @@
+$kind: http-request
+name: "Create Album"
+url: "{{base_url}}/albums/"
+method: "POST"
+headers:
+  "Content-Type": "application/json"
+  "Authorization": "Bearer {{token}}"
+body:
+  type: "json"
+  content: |+
+    {
+      "name": "Summer Vacation 2026",
+      "description": "Photos from our trip to Calabar"
+    }
+order: 2000

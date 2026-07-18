@@ -3,7 +3,8 @@ from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
 from app.services import auth_service, otp_service
 
-from app.database.deps import get_db
+from app.database.deps import get_db, get_current_user
+from app.schemas.user import UserResponse
 from app.schemas.auth import (
     LoginRequest,
     SocialLoginRequest,
@@ -14,6 +15,8 @@ from app.schemas.auth import (
     VerifyResetOTPRequest,
     ResetPasswordRequest
 )
+
+from app.models.family import FamilySpace, FamilyMember
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
 
@@ -76,9 +79,30 @@ def signup(payload: SignUpRequest, db: Session = Depends(get_db)):
 @router.post("/signup/family")
 def signup_family(payload: FamilyInfoRequest, db: Session = Depends(get_db)):
 
+    # Create family space
+    priorities_str = ",".join(payload.priorities) if payload.priorities else None
+    family_space = FamilySpace(
+        name=payload.family_space_name,
+        family_size=payload.family_size,
+        priorities=priorities_str
+    )
+    db.add(family_space)
+    db.commit()
+    db.refresh(family_space)
+
+    # Link user to this space as a member
+    member = FamilyMember(
+        user_id=payload.user_id,
+        space_id=family_space.id,
+        role="manager"
+    )
+    db.add(member)
+    db.commit()
+
     return {
-        "message": "Family info saved",
-        "family_space_name": payload.family_space_name
+        "message": "Family space created and member added",
+        "family_space_id": family_space.id,
+        "family_space_name": family_space.name
     }
 
 
@@ -138,7 +162,7 @@ def reset_password(payload: ResetPasswordRequest):
     }
 
 
-@router.get("/me")
-def get_me(token: str = Depends(oauth2_scheme)):
+@router.get("/me", response_model=UserResponse)
+def get_me(current_user: UserResponse = Depends(get_current_user)):
 
-    return {"token": token}
+    return current_user

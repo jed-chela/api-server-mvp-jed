@@ -1,0 +1,15 @@
+$kind: http-request
+name: "Create Budget"
+url: "{{base_url}}/budgets/"
+method: "POST"
+headers:
+  "Content-Type": "application/json"
+  "Authorization": "Bearer {{token}}"
+body:
+  type: "json"
+  content: |+
+    {
+      "name": "Groceries July",
+      "total_limit": 50000.0
+    }
+order: 2000

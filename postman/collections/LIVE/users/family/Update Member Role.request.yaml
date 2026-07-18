@@ -1,0 +1,7 @@
+$kind: http-request
+name: "Update Member Role"
+url: "{{base_url}}/family/members/1/role?role=manager"
+method: "PUT"
+headers:
+  "Authorization": "Bearer {{token}}"
+order: 8000

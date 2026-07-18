@@ -1,0 +1,19 @@
+$kind: http-request
+name: "Create Meal"
+url: "{{base_url}}/meals/"
+method: "POST"
+headers:
+  "Content-Type": "application/json"
+  "Authorization": "Bearer {{token}}"
+body:
+  type: "json"
+  content: |+
+    {
+      "title": "Jollof Rice with Chicken",
+      "category": "lunch",
+      "day": "Monday",
+      "selected": true,
+      "member_id": 1,
+      "notes": "Spicy option"
+    }
+order: 2000

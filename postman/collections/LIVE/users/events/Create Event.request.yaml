@@ -1,0 +1,18 @@
+$kind: http-request
+name: "Create Event"
+url: "{{base_url}}/events/"
+method: "POST"
+headers:
+  "Content-Type": "application/json"
+  "Authorization": "Bearer {{token}}"
+body:
+  type: "json"
+  content: |+
+    {
+      "name": "Family Picnic",
+      "description": "Annual summer picnic in the park",
+      "date": "2026-08-15",
+      "time": "12:00",
+      "category": "social"
+    }
+order: 2000

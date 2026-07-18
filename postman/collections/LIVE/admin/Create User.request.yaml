@@ -1,0 +1,17 @@
+$kind: http-request
+name: "Create User"
+url: "{{base_url}}/users/"
+method: "POST"
+headers:
+  "Content-Type": "application/json"
+body:
+  type: "json"
+  content: |+
+    {
+      "firstname": "Admin",
+      "surname": "User",
+      "email": "admin@afamilia.com",
+      "username": "adminuser",
+      "password": "securepassword123"
+    }
+order: 5000

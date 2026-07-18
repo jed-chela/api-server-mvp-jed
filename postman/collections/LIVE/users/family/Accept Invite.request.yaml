@@ -1,0 +1,7 @@
+$kind: http-request
+name: "Accept Invite"
+url: "{{base_url}}/family/invites/1/accept"
+method: "POST"
+headers:
+  "Authorization": "Bearer {{token}}"
+order: 6000

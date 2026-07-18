@@ -1,0 +1,7 @@
+$kind: http-request
+name: "Toggle Chore Status"
+url: "{{base_url}}/chores/1/toggle"
+method: "PATCH"
+headers:
+  "Authorization": "Bearer {{token}}"
+order: 4000

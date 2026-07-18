@@ -1,0 +1,7 @@
+$kind: http-request
+name: "Decline Invite"
+url: "{{base_url}}/family/invites/1/decline"
+method: "POST"
+headers:
+  "Authorization": "Bearer {{token}}"
+order: 7000

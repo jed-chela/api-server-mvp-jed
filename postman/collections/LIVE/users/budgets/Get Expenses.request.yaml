@@ -1,0 +1,7 @@
+$kind: http-request
+name: "Get Expenses"
+url: "{{base_url}}/budgets/1/expenses"
+method: "GET"
+headers:
+  "Authorization": "Bearer {{token}}"
+order: 5000

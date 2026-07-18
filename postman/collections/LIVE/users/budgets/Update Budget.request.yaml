@@ -1,0 +1,15 @@
+$kind: http-request
+name: "Update Budget"
+url: "{{base_url}}/budgets/1"
+method: "PUT"
+headers:
+  "Content-Type": "application/json"
+  "Authorization": "Bearer {{token}}"
+body:
+  type: "json"
+  content: |+
+    {
+      "name": "Updated Groceries July",
+      "total_limit": 60000.0
+    }
+order: 3000

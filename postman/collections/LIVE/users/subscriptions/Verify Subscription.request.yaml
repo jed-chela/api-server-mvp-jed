@@ -1,0 +1,14 @@
+$kind: http-request
+name: "Verify Subscription"
+url: "{{base_url}}/subscriptions/verify"
+method: "POST"
+headers:
+  "Content-Type": "application/json"
+  "Authorization": "Bearer {{token}}"
+body:
+  type: "json"
+  content: |+
+    {
+      "reference": "paystack_tx_ref_123456"
+    }
+order: 1000

@@ -1,8 +1,10 @@
 import logging
 
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 from sqlalchemy import text
 from sqlalchemy.exc import SQLAlchemyError
+import os
 
 from app.database.session import engine
 from app.database.base import Base
@@ -12,10 +14,11 @@ from app.core.logging import logger
 
 
 # ----------------------------------
-# Create tables
+# Create tables & directories
 # ----------------------------------
 
 Base.metadata.create_all(bind=engine)
+os.makedirs(os.path.join("static", "photos"), exist_ok=True)
 
 
 # ----------------------------------
@@ -23,6 +26,9 @@ Base.metadata.create_all(bind=engine)
 # ----------------------------------
 
 app = FastAPI(title="Afamilia API")
+
+# Serve static files (Firebase uploads placeholder)
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
 # Register routers

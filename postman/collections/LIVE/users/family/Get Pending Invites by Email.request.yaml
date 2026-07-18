@@ -1,0 +1,5 @@
+$kind: http-request
+name: "Get Pending Invites by Email"
+url: "{{base_url}}/family/invites/pending?email=relative@example.com"
+method: "GET"
+order: 5000

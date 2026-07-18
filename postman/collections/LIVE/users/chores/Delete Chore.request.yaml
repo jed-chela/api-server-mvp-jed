@@ -1,0 +1,7 @@
+$kind: http-request
+name: "Delete Chore"
+url: "{{base_url}}/chores/1"
+method: "DELETE"
+headers:
+  "Authorization": "Bearer {{token}}"
+order: 5000

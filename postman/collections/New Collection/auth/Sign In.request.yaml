@@ -1,5 +1,0 @@
-$kind: http-request
-name: Sign In
-url: "{{base_url}}"
-method: POST
-order: 1773569376595

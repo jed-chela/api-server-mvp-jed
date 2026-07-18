@@ -1,0 +1,18 @@
+$kind: http-request
+name: "Create Expense"
+url: "{{base_url}}/budgets/1/expenses"
+method: "POST"
+headers:
+  "Content-Type": "application/json"
+  "Authorization": "Bearer {{token}}"
+body:
+  type: "json"
+  content: |+
+    {
+      "name": "Supermarket Shopping",
+      "amount": 12500.0,
+      "expense_date": "2026-07-18",
+      "category": "groceries",
+      "details": "Bought fruits, milk and cereal"
+    }
+order: 6000

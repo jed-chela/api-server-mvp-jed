@@ -10,11 +10,24 @@ from app.core.security import hash_password, verify_password, create_access_toke
 
 def create_user(db: Session, payload):
 
+    firstname = payload.firstname
+    surname = payload.surname
+
+    if payload.fullname and not (firstname and surname):
+        parts = payload.fullname.strip().split(" ", 1)
+        firstname = parts[0]
+        surname = parts[1] if len(parts) > 1 else ""
+
     user = User(
         email=payload.email,
-        firstname=payload.firstname,
-        surname=payload.surname,
-        password_hash=hash_password(payload.password)
+        username=getattr(payload, "username", None),
+        firstname=firstname or "",
+        surname=surname or "",
+        password_hash=hash_password(payload.password) if payload.password else None,
+        phone_number=payload.phone_number,
+        country_code=payload.country_code,
+        preferred_language=payload.preferred_language,
+        date_of_birth=payload.date_of_birth
     )
 
     db.add(user)

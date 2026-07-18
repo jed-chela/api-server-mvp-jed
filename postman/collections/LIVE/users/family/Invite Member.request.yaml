@@ -1,0 +1,16 @@
+$kind: http-request
+name: "Invite Member"
+url: "{{base_url}}/family/invite"
+method: "POST"
+headers:
+  "Content-Type": "application/json"
+  "Authorization": "Bearer {{token}}"
+body:
+  type: "json"
+  content: |+
+    {
+      "type": "email",
+      "value": "relative@example.com",
+      "role": "member"
+    }
+order: 3000

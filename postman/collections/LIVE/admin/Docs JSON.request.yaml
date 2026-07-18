@@ -1,0 +1,90 @@
+$kind: http-request
+name: "Docs JSON"
+url: "{{base_url}}/openapi.json"
+method: "GET"
+scripts:
+  - type: afterResponse
+    code: |-
+      // Tests
+      pm.test("Status code is 200", function () {
+          pm.response.to.have.status(200);
+      });
+      
+      pm.test("Response has a <title> tag", function () {
+          pm.expect(pm.response.text()).to.include("<title>");
+      });
+      
+      // Visualizer
+      var template = `
+      <canvas id="metricsChart" height="100"></canvas>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+      <script>
+          var ctx = document.getElementById("metricsChart");
+          var chart = new Chart(ctx, {
+              type: "bar",
+              data: {
+                  labels: ["Bytes", "Script Tags", "Link Tags", "Title Length"],
+                  datasets: [{
+                      label: "HTML Metrics",
+                      data: [],
+                      backgroundColor: [
+                          "rgba(54, 162, 235, 0.6)",
+                          "rgba(255, 99, 132, 0.6)",
+                          "rgba(75, 192, 192, 0.6)",
+                          "rgba(255, 206, 86, 0.6)"
+                      ],
+                      borderColor: [
+                          "rgba(54, 162, 235, 1)",
+                          "rgba(255, 99, 132, 1)",
+                          "rgba(75, 192, 192, 1)",
+                          "rgba(255, 206, 86, 1)"
+                      ],
+                      borderWidth: 1
+                  }]
+              },
+              options: {
+                  legend: { display: true },
+                  title: {
+                      display: true,
+                      text: "Swagger UI HTML Metrics"
+                  },
+                  scales: {
+                      yAxes: [{
+                          ticks: { beginAtZero: true }
+                      }]
+                  }
+              }
+          });
+          
+          pm.getData(function (err, value) {
+              chart.data.datasets[0].data = [
+                  value.bytes,
+                  value.scriptCount,
+                  value.linkCount,
+                  value.titleLength
+              ];
+              chart.update();
+          });
+      </script>
+      `;
+      
+      function constructVisualizerPayload() {
+          var html = pm.response.text();
+          var bytes = html.length;
+          var scriptMatches = html.match(/<script/gi);
+          var scriptCount = scriptMatches ? scriptMatches.length : 0;
+          var linkMatches = html.match(/<link/gi);
+          var linkCount = linkMatches ? linkMatches.length : 0;
+          var titleMatch = html.match(/<title>(.*?)<\/title>/i);
+          var titleLength = titleMatch ? titleMatch[1].length : 0;
+          return {
+              bytes: bytes,
+              scriptCount: scriptCount,
+              linkCount: linkCount,
+              titleLength: titleLength
+          };
+      }
+      
+      pm.visualizer.set(template, constructVisualizerPayload());
+    language: text/javascript
+order: 3000

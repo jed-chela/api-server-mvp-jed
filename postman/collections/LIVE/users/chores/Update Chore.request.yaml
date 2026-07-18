@@ -1,0 +1,20 @@
+$kind: http-request
+name: "Update Chore"
+url: "{{base_url}}/chores/1"
+method: "PUT"
+headers:
+  "Content-Type": "application/json"
+  "Authorization": "Bearer {{token}}"
+body:
+  type: "json"
+  content: |+
+    {
+      "title": "Clean Kitchen",
+      "description": "Sweep and mop the kitchen floor",
+      "assignee_id": 1,
+      "due_date": "2026-07-20",
+      "due_time": "21:00",
+      "status": "open",
+      "points_reward": 25
+    }
+order: 3000

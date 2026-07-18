@@ -1,0 +1,13 @@
+$kind: http-request
+name: "Upload Photo"
+url: "{{base_url}}/albums/1/photos"
+method: "POST"
+headers:
+  "Authorization": "Bearer {{token}}"
+body:
+  type: "formdata"
+  content:
+    - key: "file"
+      type: "file"
+      src: ""
+order: 3000

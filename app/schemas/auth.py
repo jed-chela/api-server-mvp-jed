@@ -27,9 +27,11 @@ class SocialLoginRequest(BaseModel):
 
 class SignUpRequest(BaseModel):
 
-    surname: str
-    firstname: str
-    othername: Optional[str]
+    fullname: Optional[str] = None
+    surname: Optional[str] = None
+    firstname: Optional[str] = None
+    othername: Optional[str] = None
+    username: Optional[str] = None
 
     email: EmailStr
 
@@ -41,6 +43,7 @@ class SignUpRequest(BaseModel):
     date_of_birth: date
 
     password: Optional[str] = None
+
 
 
 # -------------------------

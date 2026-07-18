@@ -1,0 +1,7 @@
+$kind: http-request
+name: "Get Me"
+url: "{{base_url}}/auth/me"
+method: "GET"
+headers:
+  "Authorization": "Bearer {{token}}"
+order: 9000
